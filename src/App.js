@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import CreateTest from "./components/CreateTest";
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +38,13 @@ function App() {
             <CreateTest />
           </Route>
           <Route exact path="/">
-            {true ? <Main /> : <Redirect to="/auth" />}
+            <Main/>
+          </Route>
+          <Route path="/login">
+            {true ? <Login /> : <Redirect to="/auth" />}
+          </Route>
+          <Route path="/register">
+            {true ? <Register /> : <Redirect to="/auth" />}
           </Route>
         </Switch>
       </Router>
