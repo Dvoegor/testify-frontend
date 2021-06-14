@@ -6,8 +6,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import Login from "./Login";
-import Register from "./Register";
+import Table from "./Table";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,13 +30,12 @@ function getStepContent(stepIndex) {
     case 0:
       return (
           <div>
-            <Login/>
+            <Table/>
           </div>
       );
     case 1:
       return (
           <div>
-            <Register/>
           </div>
       );
     case 2:
