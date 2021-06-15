@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Table from "./Table";
 import List from "./List";
+import Settings from "./Settings";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,17 +30,23 @@ function getSteps() {
 
 export default function HorizontalLabelPositionBelowStepper() {
   const [idArr, setIdArr] = React.useState([]);
+  const [settings, setSettings] = React.useState({});
 
-  const sendDataToParent = (index) => { // the callback. Use a better name
+  const sendIdsToParent = (index) => { // the callback. Use a better name
     setIdArr(index);
   };
+
+  const sendSettingsToParent = (index) => { // the callback. Use a better name
+    setSettings(index);
+  };
+
 
   function getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
         return (
             <div>
-              <Table sendDataToParent={sendDataToParent}/>
+              <Table sendIdsToParent={sendIdsToParent}/>
             </div>
         );
       case 1:
@@ -49,7 +56,7 @@ export default function HorizontalLabelPositionBelowStepper() {
             </div>
         );
       case 2:
-        return 'This is the bit I really care about!';
+        return <Settings sendSettingsToParent={sendSettingsToParent}/>;
       default:
         return 'Unknown stepIndex';
     }

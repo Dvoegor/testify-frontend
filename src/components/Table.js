@@ -26,7 +26,7 @@ const columns = [
     { field: 'area', headerName: 'area', width: 150 },
 ];
 
-export default function DataGridDemo({sendDataToParent}) {
+export default function DataGridDemo({sendIdsToParent}) {
     const URL = axiosURL.axiosURL;
     const [loading, setLoading] = useState(true);
     const [rows, setRows] = useState([]);
@@ -54,7 +54,7 @@ export default function DataGridDemo({sendDataToParent}) {
                       // onRowSelected={(x) => console.log(x)}
                       onSelectionModelChange={(newSelection) => {
                           setSelectionModel(newSelection.selectionModel);
-                          sendDataToParent(newSelection.selectionModel)
+                          sendIdsToParent(newSelection.selectionModel)
                       }}
                       selectionModel={selectionModel}
             />
