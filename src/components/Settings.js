@@ -20,13 +20,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ValidationTextFields() {
+export default function ValidationTextFields({sendSettingsToParent}) {
   const classes = useStyles();
 
   const [name, setName] = React.useState([]);
 //   const [time, setTime] = React.useState([]);
 
   function handleSubmit(event) {
+    sendSettingsToParent({name: name})
+
     event.preventDefault();
   }
 
@@ -56,8 +58,9 @@ export default function ValidationTextFields() {
                    <FormControl fullWidth className={classes.margin} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
           <OutlinedInput
+              fullWidth={200}
             id="outlined-adornment-amount"
-            // onChange={handleChange('amount')}
+            onChange={(e) => setName(e.target.value)}
             // startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={60}
           />
@@ -76,7 +79,7 @@ export default function ValidationTextFields() {
                 type="submit"
                 style={{ marginTop: 15 }}
               >
-                Войти
+                Сохранить настройки
               </Button>
             </Grid>
           </div>
