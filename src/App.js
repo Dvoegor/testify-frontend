@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,6 +16,7 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import NewTest from "./components/NewTest";
 
 import Cookies from 'js-cookie';
 import jwt_decode from "jwt-decode";
@@ -43,13 +45,21 @@ function App() {
   console.log(!!cookie)
   const loggedIn = cookie ? true: false
 
+  const [newTestId, setnewTestId] = React.useState(0);
+
+  const sendnewTestIdToParent = (index) => {
+    // the callback. Use a better name
+    setnewTestId(index);
+  };
+
+
   return (
     <div>
       <Navbar />
       <Router>
         <Switch>
           <Route path="/create-test">
-          {loggedIn ? <CreateTest profileId={decoded}/> :  <Redirect to="/" />}
+          {loggedIn ? <CreateTest profileId={decoded} sendnewTestIdToParent={sendnewTestIdToParent}/> :  <Redirect to="/" />}
           </Route>
           <Route exact path="/">
           {loggedIn ? <Profile /> : <Main />}
@@ -60,6 +70,10 @@ function App() {
           </Route>
           <Route path="/register">
           {loggedIn ? <Redirect to="/" />: <Register />}
+            {/* {true ? <Register /> : <Redirect to="/auth" />} */}
+          </Route>
+          <Route path="/new-test/:id">
+          {loggedIn ? <NewTest newTestId={newTestId} /> : <Redirect to="/" />}
             {/* {true ? <Register /> : <Redirect to="/auth" />} */}
           </Route>
         </Switch>

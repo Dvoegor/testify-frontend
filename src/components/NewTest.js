@@ -31,27 +31,29 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard(idArr) {
+export default function SimpleCard({newTestId}) {
   const classes = useStyles();
 
-  const idList = idArr.idArr;
   const URL = axiosURL.axiosURL;
   const [loading, setLoading] = useState(true);
-  const [list, setList] = useState([]);
+  const [questionList, setQuestionList] = useState([]);
+
+  console.log('resultObj')
+  console.log(newTestId)
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.get(URL + "/list", {
+      const result = await axios.get(URL + "/questionList", {
         params: {
-          list: idList,
+            newTestId: newTestId,
         },
       });
-      setList(result.data)
+    //   setList(result.data)
       setLoading(false)
     }
 
     fetchData().then();
-  }, [URL, idList, setList, setLoading]);
+  }, [URL, newTestId, setLoading]);
 
 
   if (loading) {
@@ -59,8 +61,8 @@ export default function SimpleCard(idArr) {
 }
   return (
     <div>
-        <Container>
-      {list.map((item, index) => (
+        {/* <Container>
+      {resultObj.wordIds.map((item, index) => (
         <Card className={classes.root} style={{ marginBottom: 15 }}>
           <CardContent>
             <Typography
@@ -83,7 +85,7 @@ export default function SimpleCard(idArr) {
           </CardContent>
         </Card>
       ))}
-      </Container>
+      </Container> */}
     </div>
   );
 }

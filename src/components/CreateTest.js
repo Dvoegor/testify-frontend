@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Table from "./Table";
 import List from "./List";
 import Settings from "./Settings";
-import Loader from './Loader';
+import Loader from "./Loader";
 
 import axios from "axios";
 import axiosURL from "./config.json";
@@ -30,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
 
 function getSteps() {
   return [
-    "Select master blaster campaign settings",
-    "Create an ad group",
-    "Create an ad",
+    "Выберите записи",
+    "Посмотрите на выбранные записи",
+    "Выберите настройки для теста",
   ];
 }
 
-export default function HorizontalLabelPositionBelowStepper({ profileId }) {
+export default function HorizontalLabelPositionBelowStepper({ profileId, sendnewTestIdToParent }) {
   const [idArr, setIdArr] = React.useState([]);
   const [settings, setSettings] = React.useState({});
 
@@ -49,7 +49,6 @@ export default function HorizontalLabelPositionBelowStepper({ profileId }) {
     // the callback. Use a better name
     setSettings(index);
   };
-
 
   function getStepContent(stepIndex) {
     switch (stepIndex) {
@@ -68,7 +67,7 @@ export default function HorizontalLabelPositionBelowStepper({ profileId }) {
       case 2:
         return <Settings sendSettingsToParent={sendSettingsToParent} />;
       default:
-        return <Loader/>;
+        return <Loader />;
     }
   }
 
@@ -84,44 +83,48 @@ export default function HorizontalLabelPositionBelowStepper({ profileId }) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  let testId;
 
-  const URL = axiosURL.axiosURL;
-
-  // .post(URL + "/createTest", {
-  //   profileId: profileId.id,
-  //   testName: settings.name,
-  //   idArr: idArr
-  // })
-
-  console.log("suka" + settings);
-
-  if (activeStep === steps.length) {
-    console.log("Создать тест для id " + profileId.id);
-    console.log(idArr);
-    console.log(settings);
-    console.log(activeStep)
-    console.log(steps.length)
-
+  const handleFinish = (event) => {
     // вот тут два запроса отправляются, надо фиксить
     async function fetchData() {
-      console.log("data post")
       const result = await axios.post(URL + "/createTest", {
         profileId: profileId.id,
         testName: settings.name,
         idArr: idArr,
       });
-      console.log("Здесь результ")
-      // console.log("Здесь результ" + result)
+      // console.log(result.data.testId)
+      // sendResultObjToParent(result.data)
+      testId = result.data.testId
+      console.log(typeof testId)
     }
 
-    fetchData().then(
-      console.log("data got")
-      // window.location.href = '/'
-      );
+    fetchData()
+    .then(function (response) {
+      sendnewTestIdToParent(testId)
+      // window.location.href = `/new-test/${testId}`
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    // .then(data => {
+    //   console.log(data)
+    //   // window.location.href = `/new-test/${data.testId}`
+    // }
+    // );
+    // setActiveStep(0);
+    event.preventDefault();
+  };
+  console.log(testId)
+
+  if (testId === Number) {
+    <div>
+                         <Typography variant="h2" component="h1" align="center">
+                        Здесь тест с id {testId}
+                    </Typography>
+    </div>
   }
+  const URL = axiosURL.axiosURL;
 
   return (
     <div className={classes.root}>
@@ -148,11 +151,22 @@ export default function HorizontalLabelPositionBelowStepper({ profileId }) {
               onClick={handleBack}
               className={classes.backButton}
             >
-              Back
+              Назад
             </Button>
+            {activeStep === steps.length - 1 ? (
+              <Button variant="contained" color="primary" type="submit" onClick={handleFinish}>
+                Создать тест
+              </Button>
+            ) : (
+              <Button variant="contained" color="primary" onClick={handleNext}>
+                Дальше
+              </Button>
+            )}
+
+            {/*             
             <Button variant="contained" color="primary" onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
+              {activeStep === steps.length - 1 ? "Создать тест" : "Дальше"}
+            </Button> */}
           </div>
         </Grid>
         <Typography className={classes.instructions}>
