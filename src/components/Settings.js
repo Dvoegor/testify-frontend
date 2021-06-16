@@ -56,7 +56,7 @@ export default function ValidationTextFields({sendSettingsToParent}) {
           onSubmit={handleSubmit}
         >
                    <FormControl fullWidth className={classes.margin} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          <InputLabel htmlFor="outlined-adornment-amount">Название теста</InputLabel>
           <OutlinedInput
               fullWidth={200}
             id="outlined-adornment-amount"

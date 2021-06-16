@@ -49,7 +49,7 @@ export default function ValidationTextFields() {
                         <div>
                             <TextField id="standard-error" label="Пароль" helperText="Введите пароль" type="password" required/>
                         </div>
-                        <div>
+                        {/* <div>
                             <FormControl component="fieldset" style={{marginTop: 15, marginLeft: 10}} required>
                                 <FormLabel component="legend">Роль</FormLabel>
                                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
@@ -57,7 +57,7 @@ export default function ValidationTextFields() {
                                     <FormControlLabel value="teacher" control={<Radio />} label="Учитель" />
                                 </RadioGroup>
                             </FormControl>
-                        </div>
+                        </div> */}
                         <div>
                             <Grid container spacing={0} alignItems="center" alignContent="center" justify="center">
                                 <Button variant="contained" color="secondary" style={{marginTop: 15, marginBottom: 25}}>

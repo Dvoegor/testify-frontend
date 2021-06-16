@@ -14,6 +14,10 @@ import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Profile from "./components/Profile";
+
+import Cookies from 'js-cookie';
+import jwt_decode from "jwt-decode";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,22 +33,34 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
 
+  const cookie = Cookies.get('auth-token')
+  // console.log(admin)
+  if (cookie) {
+    var decoded = jwt_decode(cookie);
+ 
+    console.log(decoded);
+  }
+  console.log(!!cookie)
+  const loggedIn = cookie ? true: false
+
   return (
     <div>
       <Navbar />
       <Router>
         <Switch>
           <Route path="/create-test">
-            <CreateTest />
+          {loggedIn ? <CreateTest profileId={decoded}/> :  <Redirect to="/" />}
           </Route>
           <Route exact path="/">
-            <Main/>
+          {loggedIn ? <Profile /> : <Main />}
           </Route>
           <Route path="/login">
-            {true ? <Login /> : <Redirect to="/auth" />}
+          {loggedIn ? <Redirect to="/" />: <Login />}
+            {/* {true ? <Login /> : <Redirect to="/auth" />} */}
           </Route>
           <Route path="/register">
-            {true ? <Register /> : <Redirect to="/auth" />}
+          {loggedIn ? <Redirect to="/" />: <Register />}
+            {/* {true ? <Register /> : <Redirect to="/auth" />} */}
           </Route>
         </Switch>
       </Router>
