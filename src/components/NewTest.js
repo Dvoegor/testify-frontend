@@ -31,29 +31,30 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard({newTestId}) {
+export default function SimpleCard({testId}) {
   const classes = useStyles();
 
   const URL = axiosURL.axiosURL;
   const [loading, setLoading] = useState(true);
   const [questionList, setQuestionList] = useState([]);
 
-  console.log('resultObj')
-  console.log(newTestId)
+  // console.log('resultObj')
+  console.log(testId)
 
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(URL + "/questionList", {
         params: {
-            newTestId: newTestId,
+          testId: testId,
         },
       });
-    //   setList(result.data)
+      setQuestionList(result.data)
+      console.log(result.data)
       setLoading(false)
     }
 
     fetchData().then();
-  }, [URL, newTestId, setLoading]);
+  }, [URL, testId, setLoading]);
 
 
   if (loading) {
@@ -61,8 +62,13 @@ export default function SimpleCard({newTestId}) {
 }
   return (
     <div>
-        {/* <Container>
-      {resultObj.wordIds.map((item, index) => (
+      <div>
+        <Typography variant="h2" component="h1" align="center">
+          Здесь тест с id {testId}
+        </Typography>
+      </div>
+        <Container>
+      {questionList.map((item, index) => (
         <Card className={classes.root} style={{ marginBottom: 15 }}>
           <CardContent>
             <Typography
@@ -85,7 +91,7 @@ export default function SimpleCard({newTestId}) {
           </CardContent>
         </Card>
       ))}
-      </Container> */}
+      </Container>
     </div>
   );
 }

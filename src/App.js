@@ -16,7 +16,7 @@ import Main from "./components/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
-import NewTest from "./components/NewTest";
+import PassTest from "./components/PassTest";
 
 import Cookies from 'js-cookie';
 import jwt_decode from "jwt-decode";
@@ -39,7 +39,7 @@ function App() {
   // console.log(admin)
   if (cookie) {
     var decoded = jwt_decode(cookie);
- 
+
     console.log(decoded);
   }
   console.log(!!cookie)
@@ -72,9 +72,11 @@ function App() {
           {loggedIn ? <Redirect to="/" />: <Register />}
             {/* {true ? <Register /> : <Redirect to="/auth" />} */}
           </Route>
-          <Route path="/new-test/:id">
-          {loggedIn ? <NewTest newTestId={newTestId} /> : <Redirect to="/" />}
-            {/* {true ? <Register /> : <Redirect to="/auth" />} */}
+          {/*<Route path="/new-test/:id">*/}
+          {/*{loggedIn ? <NewTest newTestId={newTestId} /> : <Redirect to="/" />}*/}
+          {/*</Route>*/}
+          <Route path="/test/:id">
+            <PassTest/>
           </Route>
         </Switch>
       </Router>
