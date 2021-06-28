@@ -93,6 +93,8 @@ export default function HorizontalLabelPositionBelowStepper({profileId, sendnewT
             const result = await axios.post(URL + "/createTest", {
                 profileId: profileId.id,
                 testName: settings.name,
+                dateTime: settings.selectedDateTime,
+                time: settings.selectedTime,
                 idArr: idArr,
             });
             // console.log(result.data.testId)
@@ -175,3 +177,4 @@ export default function HorizontalLabelPositionBelowStepper({profileId, sendnewT
         </div>
     );
 }
+
