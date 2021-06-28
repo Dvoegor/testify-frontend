@@ -38,7 +38,6 @@ export default function SimpleCard() {
     const [loading, setLoading] = useState(true);
     const [questionList, setQuestionList] = useState([]);
     const [answerList, setAnswerList] = useState([]);
-    let answerListStart = []
     // console.log('resultObj')
     const {id} = useParams()
     const testId = id
@@ -51,6 +50,7 @@ export default function SimpleCard() {
                 },
             });
             setQuestionList(result.data)
+            let answerListStart = []
             result.data.map((item) => (answerListStart.push([item.id, ""])))
             setAnswerList(answerListStart)
             // console.log(answerListStart)
@@ -58,7 +58,7 @@ export default function SimpleCard() {
         }
 
         fetchData().then();
-    }, [URL, testId, setLoading, answerListStart]);
+    }, [URL, testId, setLoading]);
 
     function handleInputValue(index, id, value) {
         // console.log(index, id, value)
@@ -71,29 +71,20 @@ export default function SimpleCard() {
 
     function handleSubmit(event) {
         console.log(answerList)
-        // async function postData() {
-        //     await axios
-        //         .post(URL + "/login", {
-        //             email: email,
-        //             password: password,
-        //         })
-        //         .then(function (response) {
-        //             // console.log(response.headers)
-        //             const token = response.headers["auth-token"]
-        //             // const isAdmin = response.headers["admin"]
-        //             if (token) {
-        //                 document.cookie = `auth-token=${token}`
-        //                 // document.cookie = `admin=${isAdmin}`
-        //                 window.location.href = '/'
-        //             }
-        //             //   setMessage(response.data);
-        //             //   setOpen(true);
-        //         })
-        //         .catch(function (error) {
-        //             console.log(error);
-        //         });
-        // }
-        // postData();
+        async function postData() {
+            await axios
+                .post(URL + "/passTest", {
+                    testId: testId,
+                    answerList: answerList
+                })
+                .then(function (response) {
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        postData();
 
         event.preventDefault();
     }
@@ -137,7 +128,7 @@ export default function SimpleCard() {
                         color="primary"
                         style={{marginTop: 15}}
                     >
-                        Войти
+                        Заверишть тест
                     </Button>
                 </form>
             </Container>

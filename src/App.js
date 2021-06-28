@@ -17,6 +17,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import PassTest from "./components/PassTest";
+import TestResult from "./components/TestResult";
 
 import Cookies from 'js-cookie';
 import jwt_decode from "jwt-decode";
@@ -62,7 +63,7 @@ function App() {
           {loggedIn ? <CreateTest profileId={decoded} sendnewTestIdToParent={sendnewTestIdToParent}/> :  <Redirect to="/" />}
           </Route>
           <Route exact path="/">
-          {loggedIn ? <Profile /> : <Main />}
+          {loggedIn ? <Profile profileId={decoded} /> : <Main />}
           </Route>
           <Route path="/login">
           {loggedIn ? <Redirect to="/" />: <Login />}
@@ -77,6 +78,9 @@ function App() {
           {/*</Route>*/}
           <Route path="/test/:id">
             <PassTest/>
+          </Route>
+          <Route path="/test-result/:id">
+            <TestResult/>
           </Route>
         </Switch>
       </Router>
