@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from '@material-ui/core/Container';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { Link } from "react-router-dom";
 
 import Loader from './Loader';
 
@@ -56,6 +57,7 @@ export default function SimpleCard({testId}) {
     fetchData().then();
   }, [URL, testId, setLoading]);
 
+  const host = window.location.host
 
   if (loading) {
     return <Container><Loader/></Container>
@@ -63,34 +65,23 @@ export default function SimpleCard({testId}) {
   return (
     <div>
       <div>
-        <Typography variant="h2" component="h1" align="center">
-          Здесь тест с id {testId}
-        </Typography>
+      <Typography variant="h3" component="h1" align="center" style={{ marginTop: 55 }}>
+            Все готово, осталось лишь поделиться вашим тестом!
+          </Typography>
       </div>
         <Container>
-      {questionList.map((item, index) => (
-        <Card className={classes.root} style={{ marginBottom: 15 }}>
-          <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              {index + 1}
-            </Typography>
-
-            <Typography variant="h5" component="h1">
-            <HelpOutlineIcon style={{ marginRight: 5, marginBottom: -3 }}/>{item.question}
-            </Typography>
-            <Typography variant="h4" component="h2">
-            <ArrowForwardIosIcon style={{ marginRight: 0 }}/>{item.answer}
-            </Typography>
-            <Typography className={classes.pos} color="textSecondary" style={{ marginTop: 10 }}>
-              {item.area}, {item.method}, {item.function}
-            </Typography>
-          </CardContent>
-        </Card>
-      ))}
+          <div style={{ marginTop: 50, textDecoration: "none" }}>
+          <Link to="#" style={{ marginTop: 50, textDecoration: "none" }}>
+          {host}/test/{testId}
+          </Link>
+          </div>
+          <div style={{ marginTop: 50, textDecoration: "none" }}>
+          <Link to="/" style={{ marginTop: 50, textDecoration: "none" }}>
+            <Button variant="contained" color="secondary">
+              Вернуться в личный кабинет
+            </Button>
+          </Link>
+          </div>
       </Container>
     </div>
   );

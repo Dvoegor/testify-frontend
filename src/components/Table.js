@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid, ruRU } from '@material-ui/data-grid';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Typography from "@material-ui/core/Typography";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import Loader from './Loader';
@@ -19,11 +20,11 @@ const theme = createMuiTheme(
 );
 
 const columns = [
-    { field: 'question', headerName: 'question', width: 500 },
-    { field: 'answer', headerName: 'answer', width: 150 },
-    { field: 'function', headerName: 'function', width: 150 },
-    { field: 'method', headerName: 'method', width: 150 },
-    { field: 'area', headerName: 'area', width: 150 },
+    { field: 'question', headerName: 'Вопрос', width: 500 },
+    { field: 'answer', headerName: 'Ответ', width: 150 },
+    // { field: 'function', headerName: 'function', width: 150 },
+    // { field: 'method', headerName: 'method', width: 150 },
+    { field: 'area', headerName: 'Область', width: 150 },
 ];
 
 export default function DataGridDemo({sendIdsToParent}) {
@@ -47,7 +48,10 @@ export default function DataGridDemo({sendIdsToParent}) {
     }
     return (
         <Container>
-        <Grid container spacing={0} alignItems="center" alignContent="center" justify="center">
+        <Grid container spacing={0} alignItems="left" alignContent="left" justify="left">
+        <Typography variant="h5" component="h2" align="left" style={{ marginBottom: 20}}>
+                    Выберите вопросы, которые вы бы хотели видеть в тесте:
+                    </Typography>
             <Grid item xs={12} sm={12} alignItems="center" alignContent="center" justify="center">
             <ThemeProvider theme={theme}>
             <DataGrid rows={rows} columns={columns} pageSize={10} checkboxSelection={true} autoHeight={true}

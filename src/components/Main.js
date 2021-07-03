@@ -42,7 +42,7 @@ export default function FullWidthGrid() {
                         Testify
                     </Typography>
                     <Typography variant="h5" component="h2" align="center">
-                        Лучший сервис для тестирования и опросов онлайн
+                    Интеллектуальная инфокогнитивная система контроля знаний
                     </Typography>
                     <Grid container spacing={0} alignItems="center" alignContent="center" justify="center"
                           style={{marginTop: 15}}>

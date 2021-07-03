@@ -11,6 +11,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider,} from '@material-ui/pickers';
 import moment from 'moment';
 import 'moment-timezone';
+import Typography from "@material-ui/core/Typography";
 
 moment().format();
 // moment().tz("America/Los_Angeles").format();
@@ -70,6 +71,9 @@ export default function ValidationTextFields({sendSettingsToParent}) {
                 alignContent="center"
                 justify="center"
             >
+                                    <Typography variant="h5" component="h2" align="left" style={{ marginBottom: 20}}>
+                    Выберите настройки вашего теста:
+                    </Typography>
                 <FormControl fullWidth className={classes.margin} variant="outlined">
                     <form
                         className={classes.root}
@@ -87,10 +91,10 @@ export default function ValidationTextFields({sendSettingsToParent}) {
                                 labelWidth={120}
                             />
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <Grid container justify="space-around">
+                                <Grid container justify="center"  style={{ marginTop: 30 }}>
                                     <TextField
                                         id="standard-number"
-                                        label="Number"
+                                        label="Минут на тест"
                                         type="number"
                                         defaultValue={20}
                                         InputLabelProps={{
@@ -100,7 +104,7 @@ export default function ValidationTextFields({sendSettingsToParent}) {
                                     />
                                     <TextField
                                         id="datetime-local"
-                                        label="Next appointment"
+                                        label="Закрыть тест в"
                                         type="datetime-local"
                                         // defaultValue="2017-05-24T10:30"
                                         defaultValue={defaultDateTime}

@@ -66,18 +66,20 @@ export default function FullWidthGrid({profileId}) {
       >
         <Link
           to="/create-test"
-          style={{ marginTop: 30, textDecoration: "none" }}
+          style={{ marginTop: 30, marginBottom: 50, textDecoration: "none" }}
         >
           <Button variant="contained" color="secondary">
             Создать тест
           </Button>
         </Link>
       </Grid>
-
+      <Typography variant="h5" component="h1" align="center" style={{ marginTop: 10, marginBottom: 10  }}>
+      Ваши  созданные тесты:
+          </Typography>
       <Grid
         container
         spacing={1}
-        // xs={6}
+        // Ваши  созданные тесты
         // sm={3}
         // alignItems="center"
         // alignContent="center"
@@ -99,7 +101,7 @@ export default function FullWidthGrid({profileId}) {
               color="textSecondary"
               gutterBottom
             >
-              { index + 1}
+              {/* { index + 1} */}
               {/* {testsList.length()} */}
             </Typography>
             <Typography className={classes.pos} color="textSecondary" style={{ marginTop: 10 }}>
@@ -111,7 +113,7 @@ export default function FullWidthGrid({profileId}) {
           to={`/test-result/${item.id}`}
           style={{ marginTop: 30, textDecoration: "none" }}
         >
-<Button size="small">Learn More</Button>
+<Button size="small">Результат теста</Button>
         </Link>
         
       </CardActions>

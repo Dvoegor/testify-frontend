@@ -122,7 +122,6 @@ export default function HorizontalLabelPositionBelowStepper({profileId, sendnewT
     // console.log(testId)
 
     if (testId !== 0) {
-      // NewTest
       return <NewTest testId={testId}/>
     }
     const URL = axiosURL.axiosURL;

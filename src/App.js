@@ -77,7 +77,7 @@ function App() {
           {/*{loggedIn ? <NewTest newTestId={newTestId} /> : <Redirect to="/" />}*/}
           {/*</Route>*/}
           <Route path="/test/:id">
-            <PassTest/>
+            <PassTest profileId={decoded}/>
           </Route>
           <Route path="/test-result/:id">
             <TestResult/>

@@ -139,26 +139,6 @@ export default function ValidationTextFields() {
           </form>
         </Grid>
       </Grid>
-
-      {/*<Button variant="outlined" color="secondary">*/}
-      {/*    Secondary*/}
-      {/*</Button>*/}
-      {/*<Button variant="contained" color="primary">*/}
-      {/*    Primary*/}
-      {/*</Button>*/}
-
-      {/* <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid> */}
     </Grid>
   );
 }

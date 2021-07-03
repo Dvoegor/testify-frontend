@@ -60,6 +60,9 @@ export default function SimpleCard(idArr) {
   return (
     <div>
         <Container>
+        <Typography variant="h5" component="h2" align="left" style={{ marginBottom: 20}}>
+                    Эти вопросы будут в тесте:
+                    </Typography>
       {list.map((item, index) => (
         <Card className={classes.root} style={{ marginBottom: 15 }}>
           <CardContent>
@@ -78,7 +81,7 @@ export default function SimpleCard(idArr) {
             <ArrowForwardIosIcon style={{ marginRight: 0 }}/>{item.answer}
             </Typography>
             <Typography className={classes.pos} color="textSecondary" style={{ marginTop: 10 }}>
-              {item.area}, {item.method}, {item.function}
+              {item.area}
             </Typography>
           </CardContent>
         </Card>
